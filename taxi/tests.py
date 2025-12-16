@@ -2,7 +2,13 @@ from django.test import TestCase
 from django.urls import reverse
 from django.contrib.auth import get_user_model
 
-from taxi.models import Manufacturer, Car, Driver
+from taxi.models import (
+    Manufacturer,
+    Car,
+)
+
+
+User = get_user_model()
 
 
 class ManufacturerModelTest(TestCase):
@@ -22,15 +28,15 @@ class CarModelTest(TestCase):
         self.assertEqual(str(car), "X5")
 
 
-class DriverModelTest(TestCase):
+class UserModelTest(TestCase):
     def test_str(self):
-        driver = Driver.objects.create_user(
+        user = User.objects.create_user(
             username="sofa",
             password="test12345",
             first_name="Sofa",
-            last_name="Dev"
+            last_name="Dav"
         )
-        self.assertEqual(str(driver), "sofa")
+        self.assertEqual(str(user), "sofa")
 
 
 class CarListViewTest(TestCase):
@@ -62,7 +68,7 @@ class CarListViewTest(TestCase):
 
 class CarDetailViewTest(TestCase):
     def setUp(self):
-        self.user = get_user_model().objects.create_user(
+        self.user = User.objects.create_user(
             username="sofa",
             password="test12345"
         )
@@ -88,7 +94,7 @@ class CarDetailViewTest(TestCase):
 
 class CarCreateViewTest(TestCase):
     def setUp(self):
-        self.user = get_user_model().objects.create_user(
+        self.user = User.objects.create_user(
             username="sofa",
             password="test12345"
         )
